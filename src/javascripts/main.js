@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import apiKeys from './helpers/apiKeys.json';
 
-import auth from './components/auth/auth';
-import myNavbar from './components/myNavbar/myNavbar';
-import authData from './helpers/data/authData';
+import auth from './components/login/login';
+import myNavbar from './components/logout/logout';
+import authData from './components/checkIfLoggedIn/checkIfLoggedIn';
 
 import '../styles/main.scss';
 
