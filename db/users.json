@@ -1,0 +1,18 @@
+{
+  "user1": {
+    "uid": "1",
+    "name": "Name goes here"
+  },
+  "user2": {
+    "uid": "2",
+    "name": "Name goes here"
+  },
+  "user3": {
+    "uid": "3",
+    "name": "Name goes here"
+  },
+  "user4": {
+    "uid": "4",
+    "name": "Name goes here"
+  }
+}

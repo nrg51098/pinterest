@@ -1,0 +1,30 @@
+{
+    "pin1": {      
+      "pinTitle": "Chair",
+      "category": "Furniture",
+      "description": "This is very expensive and high end chair",
+      "imgURL": "image url goes here",
+      "pinURL": "page url goes here"
+    },
+    "pin2": {      
+      "pinTitle": "Chair2",
+      "category": "Furniture",
+      "description": "This is very cheap and low end chair",
+      "imgURL": "image url goes here",
+      "pinURL": "page url goes here"
+    },
+    "pin3": {      
+      "pinTitle": "Chair3",
+      "category": "Furniture",
+      "description": "This is very cheap and low end chair",
+      "imgURL": "image url goes here",
+      "pinURL": "page url goes here"
+    },
+    "pin4": {      
+      "pinTitle": "Chair4",
+      "category": "Furniture",
+      "description": "This is very cheap and low end chair",
+      "imgURL": "image url goes here",
+      "pinURL": "page url goes here"
+    }
+  }
