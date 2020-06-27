@@ -1,0 +1,22 @@
+{
+  "board1": {    
+    "uid": "1",
+    "pid":"1",
+    "boardTitle":"board title goes here"
+  },
+  "board2": {    
+    "uid": "2",
+    "pid":"2",
+    "boardTitle":"board title goes here"
+  },
+  "board3": {    
+    "uid": "2",
+    "pid":"3",
+    "boardTitle":"board title goes here"
+  },
+  "board4": {    
+    "uid": "4",
+    "pid":"4",
+    "boardTitle":"board title goes here"
+  }  
+}
