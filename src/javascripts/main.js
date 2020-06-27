@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import apiKeys from './helpers/apiKeys.json';
 
-import auth from './components/login/login';
-import myNavbar from './components/logout/logout';
-import authData from './components/checkIfLoggedIn/checkIfLoggedIn';
+import auth from './components/auth/login/login';
+import logout from './components/auth/logout/logout';
+import authData from './components/auth/checkLogIn/checkLogin';
 
 import '../styles/main.scss';
 
@@ -18,7 +18,7 @@ const init = () => {
   firebase.initializeApp(apiKeys.firebaseConfig);
   authData.checkLoginStatus();
   auth.loginButton();
-  myNavbar.logoutEvent();
+  logout.logoutEvent();
 };
 
 init();

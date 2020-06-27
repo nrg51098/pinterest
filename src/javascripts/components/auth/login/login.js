@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-import utils from '../../helpers/utils';
+import utils from '../../../helpers/utils';
 
 const signMeIn = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider(); /* google api services used to log in */
