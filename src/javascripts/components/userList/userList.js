@@ -1,4 +1,4 @@
-import userData from '../../helpers/data/userData/userData';
+import userData from '../../helpers/data/userData';
 import singleUser from '../singleUser/singleUser';
 import utils from '../../helpers/utils';
 
