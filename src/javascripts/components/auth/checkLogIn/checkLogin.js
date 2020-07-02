@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import pinList from '../../pinList/pinList';
 import userList from '../../userList/userList';
+import userPinList from '../../boardList/boardList';
 /* this one we are just adding auth package on top of our firebase package
 * this we need only when we need to use the sign in or signout funcitaionality
 * thats the reason we dont have this line in the main.js, we only have
@@ -30,6 +31,8 @@ const checkLoginStatus = () => {
       logoutButton.removeClass('hide');
       pinList.buildPins();
       userList.buildUsers();
+      userPinList.buildBoards();
+      // smashData.getSingleUserWithPins('user1');
       // boardList.buildBoards();
     } else {
       authDiv.removeClass('hide');

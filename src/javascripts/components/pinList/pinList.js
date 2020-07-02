@@ -1,4 +1,4 @@
-import pinData from '../../helpers/data/pinData/pinData';
+import pinData from '../../helpers/data/pinData';
 import utils from '../../helpers/utils';
 import singlePin from '../singlePin/singlePin';
 
