@@ -1,83 +1,83 @@
 {
     "pin1": { 
-      "boardId": "1",     
+      "boardId": "board1",     
       "pinTitle": "Chair",      
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin2": { 
-      "boardId": "1",     
+      "boardId": "board1",     
       "pinTitle": "Desk",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin3": {  
-      "boardId": "2",    
+      "boardId": "board2",    
       "pinTitle": "TV",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin4": {   
-      "boardId": "2",   
+      "boardId": "board2",   
       "pinTitle": "Photoframe",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin5": {   
-      "boardId": "3",   
+      "boardId": "board3",   
       "pinTitle": "DVD",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin6": {    
-      "boardId": "3",  
+      "boardId": "board3",  
       "pinTitle": "TeaPot",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin7": {   
-      "boardId": "4",   
+      "boardId": "board4",   
       "pinTitle": "DVD",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin8": {    
-      "boardId": "4",  
+      "boardId": "board4",  
       "pinTitle": "TeaPot",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin9": {   
-      "boardId": "5",   
+      "boardId": "board5",   
       "pinTitle": "DVD",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin10": {    
-      "boardId": "5",  
+      "boardId": "board5",  
       "pinTitle": "TeaPot",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin11": {   
-      "boardId": "6",   
+      "boardId": "board6",   
       "pinTitle": "DVD",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",
       "pinURL": "page url goes here"
     },
     "pin12": {    
-      "boardId": "6",  
+      "boardId": "board6",  
       "pinTitle": "TeaPot",
       "description": "This is description for this pin",
       "imgURL": "image url goes here",

@@ -1,26 +1,26 @@
 {
   "board1": {
     "uid": "1",    
-    "boardId": "1"
+    "boardId": "board1"
   },
   "board2": { 
     "uid": "1",    
-    "boardId": "2"
+    "boardId": "board2"
   },
   "board3": {    
     "uid": "2",    
-    "boardId": "3"
+    "boardId": "board3"
   },
   "board4": {    
     "uid": "2",    
-    "boardId": "4"
+    "boardId": "board4"
   },
   "board5": {    
     "uid": "3",    
-    "boardId": "5"
+    "boardId": "board5"
   },
   "board6": {    
     "uid": "3",    
-    "boardId": "6"
+    "boardId": "board6"
   }
 }
