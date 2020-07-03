@@ -1,11 +1,18 @@
-const boardBuilder = (board) => {
-  const domString = `
-    <div class="card" style="width: 18rem;">
-    <div class="card-body">
-    <h5 class="card-title">${board.boardTitle}</h5>
-    <p class="card-text">${board.uid}</p>
-    <p class="card-text">${board.pid}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+import singlePin from '../singlePin/singlePin';
+
+const boardBuilder = (pins) => {
+  let domString = `
+    <div class="col-12 col-md-6 col-lg-4">
+    <div class="d-flex flex-wrap justify-content-center">
+    <div class="card mb-5" style="width: 18rem;">
+    <div class="card-body ">
+  `;
+  pins.forEach((pin) => {
+    domString += singlePin.pinBuilder(pin);
+  });
+  domString += `    
+    </div>
+    </div>
     </div>
     </div>
     `;

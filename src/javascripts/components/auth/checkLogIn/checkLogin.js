@@ -3,9 +3,9 @@ import firebase from 'firebase/app';
 * when we installed the dependencies, we are importing only app module becuase
 * there are a lot of other modules that we dont want */
 import 'firebase/auth';
-import pinList from '../../pinList/pinList';
-import userList from '../../userList/userList';
-import userPinList from '../../boardList/boardList';
+// import pinList from '../../pinList/pinList';
+// import userList from '../../userList/userList';
+import boardList from '../../boardList/boardList';
 /* this one we are just adding auth package on top of our firebase package
 * this we need only when we need to use the sign in or signout funcitaionality
 * thats the reason we dont have this line in the main.js, we only have
@@ -29,9 +29,9 @@ const checkLoginStatus = () => {
       usersDiv.removeClass('hide');
       boardsDiv.removeClass('hide');
       logoutButton.removeClass('hide');
-      pinList.buildPins();
-      userList.buildUsers();
-      userPinList.buildBoards();
+      // pinList.buildPins();
+      // userList.buildUsers();
+      boardList.buildBoards();
       // smashData.getSingleUserWithPins('user1');
       // boardList.buildBoards();
     } else {
