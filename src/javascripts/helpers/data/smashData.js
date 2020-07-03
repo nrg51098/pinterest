@@ -5,7 +5,7 @@ import boardData from './boardData';
 const getSingleUserWithPins = (userObjId) => new Promise((resolve, reject) => {
   userData.getUserByUserObjId(userObjId) // get single User by userObjId
     .then((user) => {
-      console.warn(user.data);
+      // console.warn(user.data);
       const userObj = user.data; // gives us user object
       userObj.id = userObjId; // add the id field in to the object
       userObj.pins = [];
@@ -14,22 +14,20 @@ const getSingleUserWithPins = (userObjId) => new Promise((resolve, reject) => {
         .then((boards) => { // boards belongs to this user
         // get all the pins no logic here
           // console.warn(allPins);
-          boards.forEach((board) => { // iterate through the boards that we got which belongs to this user
-            pinData.getPinsByBoardId(board.boardId)
-              .then((pins) => {
-                console.warn(pins);
-                pins.forEach((pin) => {
-                  userObj.pins.push(pin);
-                  console.warn(pin);
-                });
-              })
-              .catch((error) => reject(error));
-            console.warn(userObj);
-          });
+          pinData.getPins()
+            .then((allPins) => {
+              // console.warn(allPins);
+              boards.forEach((board) => {
+                const filterdPins = allPins.filter((p) => p.boardId === board.boardId);
+                userObj.pins.push(filterdPins);
+                // console.warn(filterdPins);
+              });
+              resolve(userObj); // pass the entire userObj in following format
+              console.warn(userObj);
+            })
+            .catch((error) => reject(error));
         });
       // console.warn(userObj);
-      resolve(userObj); // pass the entire userObj in following format
-
       /* * example return:
           {
               name: 'Nikhil',

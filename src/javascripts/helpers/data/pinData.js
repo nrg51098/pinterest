@@ -12,9 +12,7 @@ const getPins = () => new Promise((resolve, reject) => {
       pins.push(allPins[pinObjId]);
     });
     resolve(pins);
-  }).catch((error) => {
-    reject(error);
-  });
+  }).catch((error) => reject(error));
 });
 
 const getPinByPinObjId = (pinObjId) => {

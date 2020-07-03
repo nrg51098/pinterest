@@ -22,10 +22,22 @@ const getBoardsByUid = (uid) => new Promise((resolve, reject) => {
         selectedBoardsObj[boardObjId].id = boardObjId;
         selectedBoards.push(selectedBoardsObj[boardObjId]);
       });
-      console.warn(selectedBoards);
+      // console.warn(selectedBoards);
       resolve(selectedBoards);
     })
     .catch((error) => reject(error));
 });
 
-export default { getBoardsByUid };
+const getAllBoards = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/boards.json`).then((response) => {
+    const allBoards = response.data;
+    const boards = [];
+    Object.keys(allBoards).forEach((boardObjId) => {
+      allBoards[boardObjId].id = boardObjId;
+      boards.push(allBoards[boardObjId]);
+    });
+    resolve(boards);
+  }).catch((error) => reject(error));
+});
+
+export default { getBoardsByUid, getAllBoards };
