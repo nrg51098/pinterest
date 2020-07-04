@@ -22,8 +22,8 @@ const checkLoginStatus = () => {
   /* the onAuthStateChanged returns a logged in user otherwise no user so you are applying the logic based on if the user exists or not. */
     if (user) {
       authDiv.addClass('hide');
-      // console.warn(firebase.auth().currentUser.uid); // to get the current logged in user
-      // console.warn(firebase.auth().currentUser.displayName); // to get the displayName
+      console.warn(firebase.auth().currentUser.uid); // to get the current logged in user
+      console.warn(firebase.auth().currentUser.displayName); // to get the displayName
       // console.warn(firebase.auth().currentUser.email); // to get the email
       pinsDiv.removeClass('hide');
       usersDiv.removeClass('hide');
