@@ -36,6 +36,7 @@ const removePinEvent = (e) => {
 const homePageEvent = () => {
   // ????????? how to get around the circular dependencies
   // ????????? how to get the logged in user here
+  // ????????? how to call event functions from other functions
   smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
       let domString = `
