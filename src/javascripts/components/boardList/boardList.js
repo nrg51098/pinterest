@@ -3,6 +3,8 @@ import utils from '../../helpers/utils';
 import singleBoard from '../singleBoard/singleBoard';
 import pinData from '../../helpers/data/pinData';
 
+const currentUser = 'user1';
+
 const removeBoardEvent = (e) => {
   const boardId = e.target.closest('.card').id;
   console.warn(boardId);
@@ -33,7 +35,8 @@ const removePinEvent = (e) => {
 
 const homePageEvent = () => {
   // ????????? how to get around the circular dependencies
-  smashData.getSingleUserWithPins('user1')
+  // ????????? how to get the logged in user here
+  smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
       let domString = `
       <h2 class="text-center">Boards</h2>
@@ -57,7 +60,7 @@ const detailBoardEvent = (e) => {
       console.warn('sssss', boardPins);
       let domString = `
       <h2 class="text-center">Detail Board</h2>
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-around">
       `;
       domString += singleBoard.detailBoardBuilder(boardPins);
       domString += `      
@@ -69,11 +72,11 @@ const detailBoardEvent = (e) => {
 };
 
 const buildBoards = () => {
-  smashData.getSingleUserWithPins('user1')
+  smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
       let domString = `
       <h2 class="text-center">Boards</h2>
-      <div class="row d-flex justify-content-center">      
+      <div class="row d-flex justify-content-around">      
       `;
       user.pins.forEach((pinsByBoard) => {
         domString += singleBoard.boardBuilder(pinsByBoard);
