@@ -6,6 +6,8 @@ import logout from './components/auth/logout/logout';
 import authData from './components/auth/checkLogIn/checkLogin';
 
 import '../styles/main.scss';
+import './components/singlePin/singlePin.scss';
+import './components/boardList/boardList.scss';
 
 /**
  * Be able to login and logout to our app
