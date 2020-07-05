@@ -13,7 +13,7 @@ const buildPins = () => {
       <div class="d-flex flex-wrap justify-content-center mx-1">
       `;
       pins.forEach((pin) => {
-        domString += singlePin.pinBuilder(pin);
+        domString += singlePin.allPinBuilder(pin);
       });
       domString += `</div>
       </div>

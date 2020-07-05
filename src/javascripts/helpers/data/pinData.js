@@ -15,11 +15,13 @@ const getPins = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const getPinByPinObjId = (pinObjId) => {
+const getPinByPinObjId = (pinObjId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins/${pinObjId}.json`)
-    .then((response) => console.warn(response.data))
-    .catch((error) => console.warn(error));
-};
+    .then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => reject(error));
+});
 
 const getPinsByBoardId = (boardId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo="${boardId}"`)
