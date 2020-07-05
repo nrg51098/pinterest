@@ -1,26 +1,32 @@
 {
   "board1": {
     "uid": "1",    
-    "boardId": "board1"
+    "boardId": "board1",
+    "boardTitle": "Travel Destinations"
   },
   "board2": { 
     "uid": "1",    
-    "boardId": "board2"
+    "boardId": "board2",
+    "boardTitle": "Home Decoration"
   },
   "board3": {    
     "uid": "2",    
-    "boardId": "board3"
+    "boardId": "board3",
+    "boardTitle": "Food Items"
   },
   "board4": {    
     "uid": "2",    
-    "boardId": "board4"
+    "boardId": "board4",
+    "boardTitle": "Restaurants"
   },
   "board5": {    
     "uid": "3",    
-    "boardId": "board5"
+    "boardId": "board5",
+    "boardTitle": "Clothings"
   },
   "board6": {    
     "uid": "3",    
-    "boardId": "board6"
+    "boardId": "board6",
+    "boardTitle": "Movies"
   }
 }

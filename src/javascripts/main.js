@@ -7,6 +7,8 @@ import authData from './components/auth/checkLogIn/checkLogin';
 
 import '../styles/main.scss';
 import './components/singlePin/singlePin.scss';
+import './components/singleBoard/singleBoard.scss';
+
 import './components/boardList/boardList.scss';
 
 /**
