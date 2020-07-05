@@ -2,6 +2,7 @@ import smashData from '../../helpers/data/smashData';
 import utils from '../../helpers/utils';
 import singleBoard from '../singleBoard/singleBoard';
 import pinData from '../../helpers/data/pinData';
+import pinList from '../pinList/pinList';
 
 const currentUser = 'user1';
 
@@ -40,7 +41,6 @@ const homePageEvent = () => {
   smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
       let domString = `
-      <h2 class="text-center">Boards</h2>
       <div class="row d-flex justify-content-center">      
       `;
       user.pins.forEach((pinsByBoard) => {
@@ -55,28 +55,45 @@ const homePageEvent = () => {
 };
 
 const detailBoardEvent = (e) => {
-  const boardId = e.target.closest('.card').id;
+  const boardId = e.target.closest('.board').id;
   pinData.getPinsByBoardId(boardId)
     .then((boardPins) => {
-      console.warn('sssss', boardPins);
       let domString = `
-      <h2 class="text-center">Detail Board</h2>
       <div class="row d-flex justify-content-around">
       `;
       domString += singleBoard.detailBoardBuilder(boardPins);
       domString += `      
       </div>`;
       utils.printToDom('#boards', domString);
+      const myBoardBtn = document.querySelector('.myBoardBtn');
+      myBoardBtn.classList.remove('active');
     })
     .catch((error) => console.warn(error));
   $('body').on('click', '.home-page', homePageEvent);
 };
 
+const boardBtnClickEvent = () => {
+  const myBoardBtn = document.querySelector('.myBoardBtn');
+  myBoardBtn.classList.add('active');
+  const myPinBtn = document.querySelector('.myPinBtn');
+  myPinBtn.classList.remove('active');
+  // eslint-disable-next-line no-use-before-define
+  buildBoards();
+};
+
+const pinBtnClickEvent = () => {
+  const myBoardBtn = document.querySelector('.myBoardBtn');
+  myBoardBtn.classList.remove('active');
+  const myPinBtn = document.querySelector('.myPinBtn');
+  myPinBtn.classList.add('active');
+  pinList.buildPins();
+  $('.myBoardBtn').click(boardBtnClickEvent);
+};
+
 const buildBoards = () => {
   smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
-      let domString = `
-      <h2 class="text-center">Boards</h2>
+      let domString = `      
       <div class="row d-flex justify-content-around">      
       `;
       user.pins.forEach((pinsByBoard) => {
@@ -88,8 +105,9 @@ const buildBoards = () => {
     })
     .catch((error) => console.warn(error));
   $('body').on('click', '.delete-board', removeBoardEvent);
-  $('body').on('click', '.detail-board', detailBoardEvent);
+  $('body').on('click', '.board', detailBoardEvent);
   $('body').on('click', '.delete-pin', removePinEvent);
+  $('.myPinBtn').click(pinBtnClickEvent);
 };
 
 export default { buildBoards };

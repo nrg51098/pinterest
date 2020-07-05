@@ -40,6 +40,17 @@ const getAllBoards = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getBoardTitleByBoardObjId = (boardObjId) => new Promise((resolve, reject) => {
+  getAllBoards()
+    .then((boards) => {
+      const singleBoard = boards.find((board) => board.boardId === boardObjId);
+      resolve(singleBoard.boardTitle);
+    })
+    .catch((error) => reject(error));
+});
+
 const deleteBoard = (boardObjId) => axios.delete(`${baseUrl}/boards/${boardObjId}.json`);
 
-export default { getBoardsByUid, getAllBoards, deleteBoard };
+export default {
+  getBoardsByUid, getAllBoards, deleteBoard, getBoardTitleByBoardObjId,
+};
