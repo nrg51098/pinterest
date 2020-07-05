@@ -20,4 +20,13 @@ const smallPinBuilder = (pin) => {
   return domString;
 };
 
-export default { pinBuilder, smallPinBuilder };
+const allPinBuilder = (pin) => {
+  const domString = ` 
+  <div class="card mb-3 hoverEffect align-self-start" id="${pin.id}" style="width: 10rem;">
+  <img class="card-img-top" src="${pin.imgURL}" alt="Card image cap">          
+  </div>     
+    `;
+  return domString;
+};
+
+export default { pinBuilder, smallPinBuilder, allPinBuilder };

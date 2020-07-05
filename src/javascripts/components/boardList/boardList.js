@@ -23,13 +23,26 @@ const removeBoardEvent = (e) => {
 const removePinEvent = (e) => {
   const pinId = e.target.closest('.card').id;
   console.warn(pinId);
-  // actually delete this mushroom from firebase
-  smashData.totallyRemovePin(pinId)
-    .then(() => {
-      // reprint the dom (so the lil shroomie goes away)
-      // eslint-disable-next-line no-use-before-define
-      buildBoards();
-      // utils.printToDom('#board', '');
+  pinData.getPinByPinObjId(pinId) // this one is just to get the board Id so we can print the same board again
+    .then((pin) => {
+      console.warn(pin);
+      smashData.totallyRemovePin(pinId)
+        .then(() => {
+          pinData.getPinsByBoardId(pin.boardId)
+            .then((boardPins) => {
+              console.warn(boardPins.length);
+              if (boardPins.length === 0) {
+              // eslint-disable-next-line no-use-before-define
+                buildBoards();
+              } else {
+              // eslint-disable-next-line no-use-before-define
+                buildPinsByBoardId(pin.boardId);
+              }
+            });
+        // eslint-disable-next-line no-use-before-define
+        // buildBoards();
+        // utils.printToDom('#board', '');
+        });
     })
     .catch((err) => console.error('could not delete pin', err));
 };
@@ -54,22 +67,26 @@ const homePageEvent = () => {
   $('body').on('click', '.delete-board', removeBoardEvent);
 };
 
-const detailBoardEvent = (e) => {
-  const boardId = e.target.closest('.board').id;
+const buildPinsByBoardId = (boardId) => {
   pinData.getPinsByBoardId(boardId)
     .then((boardPins) => {
       let domString = `
-      <div class="row d-flex justify-content-around">
-      `;
+    <div class="row d-flex justify-content-around">
+    `;
       domString += singleBoard.detailBoardBuilder(boardPins);
       domString += `      
-      </div>`;
+    </div>`;
       utils.printToDom('#boards', domString);
       const myBoardBtn = document.querySelector('.myBoardBtn');
       myBoardBtn.classList.remove('active');
     })
     .catch((error) => console.warn(error));
   $('body').on('click', '.home-page', homePageEvent);
+};
+
+const detailBoardEvent = (e) => {
+  const boardId = e.target.closest('.board').id;
+  buildPinsByBoardId(boardId);
 };
 
 const boardBtnClickEvent = () => {
