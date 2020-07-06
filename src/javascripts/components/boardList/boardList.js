@@ -3,6 +3,7 @@ import utils from '../../helpers/utils';
 import singleBoard from '../singleBoard/singleBoard';
 import pinData from '../../helpers/data/pinData';
 import pinList from '../pinList/pinList';
+import singlePin from '../singlePin/singlePin';
 
 const currentUser = 'user1';
 
@@ -107,6 +108,28 @@ const pinBtnClickEvent = () => {
   $('.myBoardBtn').click(boardBtnClickEvent);
 };
 
+const backBtnClickEvent = (e) => {
+  const boardId = e.target.closest('.card').id;
+  buildPinsByBoardId(boardId);
+};
+
+const pinShowDetailEvent = (e) => {
+  const pinId = e.target.closest('.card').id;
+  pinData.getPinByPinObjId(pinId)
+    .then((pinParam) => {
+      console.warn(pinParam);
+      const pin = pinParam;
+      pin.id = pinId;
+      console.warn(pin);
+      const domString = singlePin.pinDetailBuilder(pin);
+      utils.printToDom('#boards', domString);
+      $('body').on('click', '.home-page', homePageEvent);
+      $('.myPinBtn').click(pinBtnClickEvent);
+      $('.backButton').click(backBtnClickEvent);
+    })
+    .catch((error) => console.warn(error));
+};
+
 const buildBoards = () => {
   smashData.getSingleUserWithPins(currentUser)
     .then((user) => {
@@ -125,6 +148,7 @@ const buildBoards = () => {
   $('body').on('click', '.board', detailBoardEvent);
   $('body').on('click', '.delete-pin', removePinEvent);
   $('.myPinBtn').click(pinBtnClickEvent);
+  $('body').on('click', '.pinDetail', pinShowDetailEvent);
 };
 
 export default { buildBoards };
