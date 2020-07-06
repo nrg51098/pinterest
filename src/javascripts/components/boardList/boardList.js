@@ -9,46 +9,37 @@ const currentUser = 'user1';
 
 const removeBoardEvent = (e) => {
   const boardId = e.target.closest('.card').id;
-  console.warn(boardId);
-  // actually delete this mushroom from firebase
   smashData.totallyRemoveBoard(boardId)
     .then(() => {
-      // reprint the dom (so the lil shroomie goes away)
+      // reprint the dom (so all the remaining boards shows up if no boards, show empty)
       // eslint-disable-next-line no-use-before-define
       buildBoards();
-      // utils.printToDom('#board', '');
     })
     .catch((err) => console.error('could not delete board', err));
 };
 
 const removePinEvent = (e) => {
   const pinId = e.target.closest('.card').id;
-  console.warn(pinId);
-  pinData.getPinByPinObjId(pinId) // this one is just to get the board Id so we can print the same board again
+  pinData.getPinByPinObjId(pinId) // this one is just to get the board Id before we delete the pin so we can print the same board again with rest pins
     .then((pin) => {
-      console.warn(pin);
       smashData.totallyRemovePin(pinId)
         .then(() => {
-          pinData.getPinsByBoardId(pin.boardId)
+          pinData.getPinsByBoardId(pin.boardId) // gets the pins by boardId
             .then((boardPins) => {
-              console.warn(boardPins.length);
-              if (boardPins.length === 0) {
+              if (boardPins.length === 0) { // this if is just to take to home page if all the pins for that board are deleted
               // eslint-disable-next-line no-use-before-define
                 buildBoards();
-              } else {
+              } else { // otherwise show the rest of the pins for that board
               // eslint-disable-next-line no-use-before-define
                 buildPinsByBoardId(pin.boardId);
               }
             });
-        // eslint-disable-next-line no-use-before-define
-        // buildBoards();
-        // utils.printToDom('#board', '');
         });
     })
     .catch((err) => console.error('could not delete pin', err));
 };
 
-const homePageEvent = () => {
+const homePageEvent = () => { // this is to reprint the dom back and forth from home page to boardDetail Page
   // ????????? how to get around the circular dependencies
   // ????????? how to get the logged in user here
   // ????????? how to call event functions from other functions
@@ -58,17 +49,17 @@ const homePageEvent = () => {
       <div class="row d-flex justify-content-center">      
       `;
       user.pins.forEach((pinsByBoard) => {
-        domString += singleBoard.boardBuilder(pinsByBoard);
+        domString += singleBoard.boardBuilder(pinsByBoard); // prints one by one pin per each board, this shows multiple boards with multiple pins
       });
       domString += `      
       </div>`;
       utils.printToDom('#boards', domString);
     })
     .catch((error) => console.warn(error));
-  $('body').on('click', '.delete-board', removeBoardEvent);
+  $('body').on('click', '.delete-board', removeBoardEvent); // btn click event to delete board and associated pins
 };
 
-const buildPinsByBoardId = (boardId) => {
+const buildPinsByBoardId = (boardId) => { // function to build the pins by board Id gets run from the detailBoardEvent
   pinData.getPinsByBoardId(boardId)
     .then((boardPins) => {
       let domString = `
@@ -78,19 +69,19 @@ const buildPinsByBoardId = (boardId) => {
       domString += `      
     </div>`;
       utils.printToDom('#boards', domString);
-      const myBoardBtn = document.querySelector('.myBoardBtn');
+      const myBoardBtn = document.querySelector('.myBoardBtn'); // making the myboard button deactive, so user can select again
       myBoardBtn.classList.remove('active');
     })
     .catch((error) => console.warn(error));
-  $('body').on('click', '.home-page', homePageEvent);
+  $('body').on('click', '.home-page', homePageEvent); // going back to home page
 };
 
-const detailBoardEvent = (e) => {
+const detailBoardEvent = (e) => { // event listner function to show the single detail board with all the pins
   const boardId = e.target.closest('.board').id;
   buildPinsByBoardId(boardId);
 };
 
-const boardBtnClickEvent = () => {
+const myBoardBtnClickEvent = () => { // event listener function to go back to the home page with multiple board
   const myBoardBtn = document.querySelector('.myBoardBtn');
   myBoardBtn.classList.add('active');
   const myPinBtn = document.querySelector('.myPinBtn');
@@ -99,52 +90,48 @@ const boardBtnClickEvent = () => {
   buildBoards();
 };
 
-const pinBtnClickEvent = () => {
+const pinBtnClickEvent = () => { // event listner function to show all the pins, I need to put the logic to show all pins belong to this user
   const myBoardBtn = document.querySelector('.myBoardBtn');
   myBoardBtn.classList.remove('active');
   const myPinBtn = document.querySelector('.myPinBtn');
   myPinBtn.classList.add('active');
   pinList.buildPins();
-  $('.myBoardBtn').click(boardBtnClickEvent);
+  $('.myBoardBtn').click(myBoardBtnClickEvent); // this one is event handler to go back to the home page, the btn name should be myBoardsBtn
 };
 
-const backBtnClickEvent = (e) => {
+const backBtnClickEvent = (e) => { // this is event handler function to go back to the same board from pinShowDetailEvent to previous page
   const boardId = e.target.closest('.card').id;
-  buildPinsByBoardId(boardId);
+  buildPinsByBoardId(boardId); // reprint the dom
 };
 
-const pinShowDetailEvent = (e) => {
-  const pinId = e.target.closest('.card').id;
-  pinData.getPinByPinObjId(pinId)
-    .then((pinParam) => {
-      console.warn(pinParam);
-      const pin = pinParam;
-      pin.id = pinId;
-      console.warn(pin);
-      const domString = singlePin.pinDetailBuilder(pin);
+const pinShowDetailEvent = (e) => { // this is to show the detail view of the pin with title and description
+  const pinId = e.target.closest('.card').id; // getting the pinId
+  pinData.getPinByPinObjId(pinId) // getting the pin object from the pinId
+    .then((pin) => {
+      const domString = singlePin.pinDetailBuilder(pin); // passing the pin object to the pinDetailBuilder function
       utils.printToDom('#boards', domString);
-      $('body').on('click', '.home-page', homePageEvent);
+      $('body').on('click', '.home-page', homePageEvent); // adding all the event listners back
       $('.myPinBtn').click(pinBtnClickEvent);
       $('.backButton').click(backBtnClickEvent);
     })
     .catch((error) => console.warn(error));
 };
 
-const buildBoards = () => {
-  smashData.getSingleUserWithPins(currentUser)
-    .then((user) => {
+const buildBoards = () => { // this is the initial entry function shows the boards and pins associated with this user
+  smashData.getSingleUserWithPins(currentUser) // gets the pins for this user, pin has the boardId inside pin object to seperate the pins by board
+    .then((user) => { // print the user to see the user object structure
       let domString = `      
       <div class="row d-flex justify-content-around">      
       `;
-      user.pins.forEach((pinsByBoard) => {
-        domString += singleBoard.boardBuilder(pinsByBoard);
+      user.pins.forEach((pinsByBoard) => { // user.pins has multiple boards array inside the multiple pins array,
+        domString += singleBoard.boardBuilder(pinsByBoard); // here passing the pins by board, this will iterate multiple times if there are multiple boards
       });
       domString += `      
       </div>`;
-      utils.printToDom('#boards', domString);
+      utils.printToDom('#boards', domString); // printing it to the dom
     })
     .catch((error) => console.warn(error));
-  $('body').on('click', '.delete-board', removeBoardEvent);
+  $('body').on('click', '.delete-board', removeBoardEvent); // attaching all the event listners
   $('body').on('click', '.board', detailBoardEvent);
   $('body').on('click', '.delete-pin', removePinEvent);
   $('.myPinBtn').click(pinBtnClickEvent);
@@ -152,17 +139,3 @@ const buildBoards = () => {
 };
 
 export default { buildBoards };
-
-/*
-{
-id: "user1",
-name: "Name goes here",
-pins: [
- {boardId: "1", description: "This is description for this pin", imgURL: "image url goes here", pinTitle: "Chair", pinURL: "page url goes here"},
- {boardId: "1", description: "This is description for this pin", imgURL: "image url goes here", pinTitle: "Desk", pinURL: "page url goes here"},
- {boardId: "2", description: "This is description for this pin", imgURL: "image url goes here", pinTitle: "TV", pinURL: "page url goes here"},
- {boardId: "2", description: "This is description for this pin", imgURL: "image url goes here", pinTitle: "Photoframe", pinURL: "page url goes here"}
-],
-uid: "1"
-}
-*/
