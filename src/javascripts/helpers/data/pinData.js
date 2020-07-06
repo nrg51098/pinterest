@@ -3,7 +3,7 @@ import apiKeys from '../apiKeys.json';
 
 const baseUrl = apiKeys.firebaseConfig.databaseURL;
 
-const getPins = () => new Promise((resolve, reject) => {
+const getPins = () => new Promise((resolve, reject) => { // get all the pins in firebase no logic
   axios.get(`${baseUrl}/pins.json`).then((response) => {
     const allPins = response.data;
     const pins = [];
@@ -15,7 +15,7 @@ const getPins = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const getPinByPinObjId = (pinObjId) => new Promise((resolve, reject) => {
+const getPinByPinObjId = (pinObjId) => new Promise((resolve, reject) => { // get pin object by pinObjId
   axios.get(`${baseUrl}/pins/${pinObjId}.json`)
     .then((response) => {
       resolve(response.data);
@@ -27,15 +27,12 @@ const getPinsByBoardId = (boardId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json?orderBy="boardId"&equalTo="${boardId}"`)
 
     .then((response) => {
-      console.warn(response.data);
       const selectedPinsObj = response.data;
       const selectedPins = [];
       Object.keys(selectedPinsObj).forEach((pinObjId) => {
         selectedPinsObj[pinObjId].id = pinObjId;
         selectedPins.push(selectedPinsObj[pinObjId]);
       });
-      console.warn('testdasdf');
-      console.warn(selectedPins);
       resolve(selectedPins);
     })
     .catch((error) => reject(error));

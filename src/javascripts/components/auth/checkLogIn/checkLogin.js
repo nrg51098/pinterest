@@ -31,7 +31,7 @@ const checkLoginStatus = () => {
       logoutButton.removeClass('hide');
       // pinList.buildPins();
       // userList.buildUsers();
-      boardList.buildBoards();
+      boardList.buildBoards(); // this builds the home page for one user with boards and pins inside it.
       // smashData.getSingleUserWithPins('user1');
       // boardList.buildBoards();
     } else {

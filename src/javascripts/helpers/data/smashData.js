@@ -5,7 +5,6 @@ import boardData from './boardData';
 const getSingleUserWithPins = (userObjId) => new Promise((resolve, reject) => {
   userData.getUserByUserObjId(userObjId) // get single User by userObjId
     .then((user) => {
-      // console.warn(user.data);
       const userObj = user.data; // gives us user object
       userObj.id = userObjId; // add the id field in to the object
       userObj.pins = [];
@@ -13,21 +12,18 @@ const getSingleUserWithPins = (userObjId) => new Promise((resolve, reject) => {
       boardData.getBoardsByUid(userObj.uid) // get boards by uid which we have in the user obj this will give only boards belongs to this user
         .then((boards) => { // boards belongs to this user
         // get all the pins no logic here
-          // console.warn(allPins);
           pinData.getPins()
             .then((allPins) => {
-              // console.warn(allPins);
               boards.forEach((board) => {
                 const filterdPins = allPins.filter((p) => p.boardId === board.boardId);
                 userObj.pins.push(filterdPins);
-                // console.warn(filterdPins);
               });
               resolve(userObj); // pass the entire userObj in following format
               console.warn(userObj);
             })
             .catch((error) => reject(error));
         });
-      // console.warn(userObj);
+      // console.warn(userObj); verify this again
       /* * example return:
           {
               name: 'Nikhil',
@@ -52,7 +48,6 @@ const getSingleUserWithPins = (userObjId) => new Promise((resolve, reject) => {
 const getSingleUserWithBoards = (userObjId) => new Promise((resolve, reject) => {
   userData.getUserByUserObjId(userObjId) // get single User by userObjId
     .then((user) => {
-      // console.warn(user.data);
       const userObj = user.data; // gives us user object
       userObj.id = userObjId; // add the id field in to the object
       userObj.boards = [];
@@ -62,7 +57,6 @@ const getSingleUserWithBoards = (userObjId) => new Promise((resolve, reject) => 
         // get all the pins no logic here
           boards.forEach((board) => {
             userObj.boards.push(board);
-            console.warn(board.id);
           });
           resolve(userObj);
         });

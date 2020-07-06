@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/app'; // this one imports the firebase but we are only getting the web app
+import 'firebase/auth'; // importing the auth module from the firebase we only need auth.
 
 import utils from '../../../helpers/utils';
 

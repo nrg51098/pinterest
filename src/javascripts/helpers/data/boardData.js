@@ -22,7 +22,6 @@ const getBoardsByUid = (uid) => new Promise((resolve, reject) => {
         selectedBoardsObj[boardObjId].id = boardObjId;
         selectedBoards.push(selectedBoardsObj[boardObjId]);
       });
-      // console.warn(selectedBoards);
       resolve(selectedBoards);
     })
     .catch((error) => reject(error));
